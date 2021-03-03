@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/detail.css') }}">
+</head>
+
+<body>
+    <header>
+        <h1>{{news_info.title}}</h1>
+        <div>
+            <span>{{news_info.points}} points | </span>
+            <span>By {{news_info.author}} | </span>
+            
+            <a href="{{news_info.link}}" target="_blank">{{news_info.link}}</a>
+        </div>
+        
+        
+    </header>
+  
+  <section>
+      
+      {% for comment in comments %}
+        <div class="comments_info">
+            <h3>{{comment.author}} :</h3>
+            <span>{{comment.text|safe}}</span>
+        </div>
+        
+      {% endfor %}
+      
+  </section>
+</body>
+
+</html>

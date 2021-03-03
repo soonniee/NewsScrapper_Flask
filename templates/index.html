@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- <link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet"></link> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+    <header>
+        <h1>Nomad News</h1>
+        {% if news_popular %}
+        <h4>Order by : <a href="/?order_by=popular"class="clickDisabled">HOT</a> | <a href="/?order_by=new">NEW</a></h4>
+        {% endif %}
+        {% if news_new %}
+        <h4>Order by : <a href="/?order_by=popular">HOT</a> | <a href="/?order_by=new"class="clickDisabled">NEW</a></h4>
+        {% endif %}
+    </header>
+  
+  <section>
+      {% if news_popular %}
+      {% for news_info in news_popular %}
+        <div class="news_info">
+            <div><a class="comments_link" href="/comments/{{news_info.id}}">{{news_info.title}}</a><a class="news_link" href="{{news_info.link}}" target="_blank">( {{news_info.link}} )</a></div>
+            <span>{{news_info.points}} points | </span>
+            <span>By : {{news_info.author}} | </span>
+            <span>{{news_info.comments}} comments</span>
+        </div>
+        
+      {% endfor %}
+      {% endif %}
+      {% if news_new %}
+      {% for news_info in news_new %}
+        <div class="news_info">
+            <div><a class="comments_link" href="/comments/{{news_info.id}}">{{news_info.title}}</a><a class="news_link" href="{{news_info.link}}"target="_blank">( {{news_info.link}} )</a></div>
+            <span>{{news_info.points}} points | </span>
+            <span>By : {{news_info.author}} | </span>
+            <span>{{news_info.comments}} comments</span>
+        </div>
+      {% endfor %}
+      {% endif %}
+  </section>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
